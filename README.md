@@ -1,6 +1,8 @@
 # USWDS Sandbox
 
-An eleventy site for rapid web prototyping and testing new work with USWDS. This site is designed to run locally and on [Cloud.gov pages](https://pages.cloud.gov/).
+An eleventy site for rapid web prototyping and testing new work with USWDS. This site is designed to run locally and on [GitHub Pages](https://pages.github.com/).
+
+**Live site:** https://uswds.github.io/uswds-sandbox/
 
 ## Requirements
 

@@ -1,13 +1,8 @@
-// TODO: After Canary 19:
-// const { EleventyHtmlBasePlugin } = require("@11ty/eleventy");
+import { EleventyHtmlBasePlugin } from "@11ty/eleventy";
 
-module.exports = function (eleventyConfig) {
-  // TODO: After Canary 19:
-  // eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
+export default function (eleventyConfig) {
+  eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
   eleventyConfig.addPassthroughCopy("src/assets");
-	eleventyConfig.setBrowserSyncConfig({
-		files: './_site/assets/css/**/*.css'
-	});
 
   let baseurl = "/";
   if (process.env.BASEURL) {
@@ -25,4 +20,4 @@ module.exports = function (eleventyConfig) {
       data: "_data",
     },
   };
-};
+}

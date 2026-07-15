@@ -4,7 +4,7 @@
     <div class="usa-navbar">
       <div class="usa-logo" id="basic-logo">
         <em class="usa-logo__text">
-          <a href="javascript:void(0)" title="{{ meta.project.name }}">
+          <a href="/" title="{{ meta.project.name }}">
             {{ meta.project.name }}
           </a>
         </em>
@@ -13,7 +13,7 @@
     </div>
     <nav aria-label="Primary navigation" class="usa-nav">
       <button class="usa-nav__close">
-        <img src="{{ '/assets/img/usa-icons/close.svg' | url }}" role="img" alt="Close" />
+        <img src="{{ '/assets/img/usa-icons/close.svg' }}" role="img" alt="Close" />
       </button>
       <ul class="usa-nav__primary usa-accordion">
         {% for item in nav.primary %}
@@ -21,7 +21,7 @@
           {% if item.contents %}
           {% assign button_id = item.name | slugify | prepend: "nav-" %}
           <button
-            class="usa-accordion__button usa-nav__link usa-current"
+            class="usa-accordion__button usa-nav__link"
             aria-expanded="false"
             aria-controls="{{ button_id }}"
           >
@@ -30,12 +30,12 @@
           <ul id="{{ button_id }}" class="usa-nav__submenu">
             {% for subsection in item.contents %}
             <li class="usa-nav__submenu-item">
-              <a href="#">{{ subsection }}</a>
+              <a href="{{ subsection.url }}">{{ subsection.name }}</a>
             </li>
             {% endfor %}
           </ul>
           {% else %}
-          <a href="javascript:void(0)" class="usa-nav__link">
+          <a href="{{ item.url }}" class="usa-nav__link">
             <span>{{ item.name }}</span>
           </a>
           {% endif %}
@@ -55,7 +55,7 @@
         />
         <button class="usa-button" type="submit">
           <img
-            src="{{ '/assets/img/usa-icons-bg/search--white.svg' | url }}"
+            src="{{ '/assets/img/usa-icons-bg/search--white.svg' }}"
             class="usa-search__submit-icon"
             alt="Search"
           />

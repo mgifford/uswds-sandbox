@@ -1,0 +1,94 @@
+---
+---
+
+<!doctype html>
+<html lang="en">
+{% include "head.html" %}
+  <body class="{{ page.body }}">
+    {% include "skipnav.html" %}
+    {% include "banner.html" %}
+    {% include "header--basic.html" %}
+    <main id="main-content">
+      <div class="grid-container usa-prose padding-y-3">
+        {% include "breadcrumb.html" %}
+        <div class="grid-row grid-gap">
+          <div class="grid-col-3">
+            <nav class="usa-sidenav" aria-label="Secondary navigation">
+              <ul class="usa-sidenav__list">
+                <li class="usa-sidenav__item">
+                  <a href="/components/">Components</a>
+                  <ul class="usa-sidenav__list">
+                    <li class="usa-sidenav__item"><a href="/components/accordion/">Accordion</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/alert/">Alert</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/banner/">Banner</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/breadcrumb/">Breadcrumb</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/button/">Button</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/button-group/">Button Group</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/card/">Card</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/checkbox/">Checkbox</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/combo-box/">Combo Box</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/date-picker/">Date Picker</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/date-range-picker/">Date Range Picker</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/dropdown/">Dropdown</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/footer/">Footer</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/form/">Form</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/grid/">Grid</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/header/">Header</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/icon/">Icon</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/identifier/">Identifier</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/input-mask/">Input Mask</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/input-prefix-suffix/">Input Prefix/Suffix</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/label/">Label</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/link/">Link</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/list/">List</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/modal/">Modal</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/navigation/">Navigation</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/pagination/">Pagination</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/process/">Process</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/radio/">Radio</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/range-slider/">Range Slider</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/search/">Search</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/side-navigation/">Side Navigation</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/slider/">Slider</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/step-indicator/">Step Indicator</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/summary-box/">Summary Box</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/table/">Table</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/tag/">Tag</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/text-input/">Text Input</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/tooltip/">Tooltip</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/typography/">Typography</a></li>
+                    <li class="usa-sidenav__item"><a href="/components/validation/">Validation</a></li>
+                  </ul>
+                </li>
+                <li class="usa-sidenav__item">
+                  <a href="/patterns/">Patterns</a>
+                  <ul class="usa-sidenav__list">
+                    <li class="usa-sidenav__item"><a href="/patterns/authentication/">Authentication</a></li>
+                    <li class="usa-sidenav__item"><a href="/patterns/contact-form/">Contact Form</a></li>
+                    <li class="usa-sidenav__item"><a href="/patterns/create-a-form/">Create a Form</a></li>
+                    <li class="usa-sidenav__item"><a href="/patterns/documentation/">Documentation</a></li>
+                    <li class="usa-sidenav__item"><a href="/patterns/grid-content/">Grid Content</a></li>
+                    <li class="usa-sidenav__item"><a href="/patterns/index-settings/">Index Settings</a></li>
+                    <li class="usa-sidenav__item"><a href="/patterns/name-tags-formats/">Name Tags/Formats</a></li>
+                    <li class="usa-sidenav__item"><a href="/patterns/name-title-suffix/">Name Title Suffix</a></li>
+                    <li class="usa-sidenav__item"><a href="/patterns/password-reset/">Password Reset</a></li>
+                    <li class="usa-sidenav__item"><a href="/patterns/profile/">Profile</a></li>
+                    <li class="usa-sidenav__item"><a href="/patterns/search-with-autocomplete/">Search with Autocomplete</a></li>
+                    <li class="usa-sidenav__item"><a href="/patterns/sign-in/">Sign In</a></li>
+                    <li class="usa-sidenav__item"><a href="/patterns/sign-up/">Sign Up</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div class="grid-col-9">
+            {{ content }}
+          </div>
+        </div>
+      </div>
+    </main>
+    {% include "footer.html" %}
+    {% include "identifier.html" %}
+    <script src="{{ '/assets/js/uswds.min.js' }}"></script>
+  </body>
+</html>

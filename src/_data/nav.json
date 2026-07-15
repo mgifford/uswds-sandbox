@@ -1,31 +1,81 @@
 {
   "primary": [
     {
-      "name": "Services",
+      "name": "Home",
+      "url": "/"
+    },
+    {
+      "name": "Components",
+      "url": "/components/",
       "contents": [
-        "Product studio",
-        "Site analytics",
-        "Consultations"
+        {"name": "Accordion", "url": "/components/accordion/"},
+        {"name": "Alert", "url": "/components/alert/"},
+        {"name": "Banner", "url": "/components/banner/"},
+        {"name": "Breadcrumb", "url": "/components/breadcrumb/"},
+        {"name": "Button", "url": "/components/button/"},
+        {"name": "Button Group", "url": "/components/button-group/"},
+        {"name": "Card", "url": "/components/card/"},
+        {"name": "Checkbox", "url": "/components/checkbox/"},
+        {"name": "Combo Box", "url": "/components/combo-box/"},
+        {"name": "Date Picker", "url": "/components/date-picker/"},
+        {"name": "Date Range Picker", "url": "/components/date-range-picker/"},
+        {"name": "Dropdown", "url": "/components/dropdown/"},
+        {"name": "Footer", "url": "/components/footer/"},
+        {"name": "Form", "url": "/components/form/"},
+        {"name": "Grid", "url": "/components/grid/"},
+        {"name": "Header", "url": "/components/header/"},
+        {"name": "Icon", "url": "/components/icon/"},
+        {"name": "Identifier", "url": "/components/identifier/"},
+        {"name": "Input Mask", "url": "/components/input-mask/"},
+        {"name": "Input Prefix/Suffix", "url": "/components/input-prefix-suffix/"},
+        {"name": "Label", "url": "/components/label/"},
+        {"name": "Link", "url": "/components/link/"},
+        {"name": "List", "url": "/components/list/"},
+        {"name": "Modal", "url": "/components/modal/"},
+        {"name": "Navigation", "url": "/components/navigation/"},
+        {"name": "Pagination", "url": "/components/pagination/"},
+        {"name": "Process", "url": "/components/process/"},
+        {"name": "Radio", "url": "/components/radio/"},
+        {"name": "Range Slider", "url": "/components/range-slider/"},
+        {"name": "Search", "url": "/components/search/"},
+        {"name": "Side Navigation", "url": "/components/side-navigation/"},
+        {"name": "Slider", "url": "/components/slider/"},
+        {"name": "Step Indicator", "url": "/components/step-indicator/"},
+        {"name": "Summary Box", "url": "/components/summary-box/"},
+        {"name": "Table", "url": "/components/table/"},
+        {"name": "Tag", "url": "/components/tag/"},
+        {"name": "Text Input", "url": "/components/text-input/"},
+        {"name": "Tooltip", "url": "/components/tooltip/"},
+        {"name": "Typography", "url": "/components/typography/"},
+        {"name": "Validation", "url": "/components/validation/"}
       ]
     },
     {
-      "name": "Community",
+      "name": "Templates",
+      "url": "/templates/",
       "contents": [
-        "Slack",
-        "GitHub",
-        "Newsgroups and listserv"
+        {"name": "404 Page", "url": "/templates/404/"},
+        {"name": "Documentation", "url": "/templates/documentation/"},
+        {"name": "Landing Page", "url": "/templates/landing/"},
+        {"name": "Authentication", "url": "/templates/authentication/"}
       ]
     },
     {
-      "name": "Contact"
+      "name": "Patterns",
+      "url": "/patterns/",
+      "contents": [
+        {"name": "Contact Form", "url": "/patterns/contact-form/"},
+        {"name": "Registration Form", "url": "/patterns/registration-form/"},
+        {"name": "Search with Autocomplete", "url": "/patterns/search-with-autocomplete/"},
+        {"name": "Password Reset", "url": "/patterns/password-reset/"},
+        {"name": "Profile", "url": "/patterns/profile/"}
+      ]
     }
   ],
   "secondary": [
     {
-      "name": "Design principles"
-    },
-    {
-      "name": "Log in"
+      "name": "USWDS",
+      "url": "https://designsystem.digital.gov/"
     }
   ]
 }

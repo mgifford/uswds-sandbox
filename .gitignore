@@ -1,11 +1,17 @@
-.sass-cache
-.gz
-.DS_Store
+# Build output
 _site
-.jekyll-cache
-_site/assets
+
+# Generated assets (built by Gulp)
 src/assets/img
 src/assets/css
 src/assets/fonts
 src/assets/js
+
+# Dependencies
 node_modules
+
+# OS files
+.DS_Store
+
+# Archives
+.gz

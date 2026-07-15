@@ -1,22 +1,36 @@
-<nav class="usa-breadcrumb" aria-label="Breadcrumbs,,">
+<nav class="usa-breadcrumb" aria-label="Breadcrumbs">
   <ol class="usa-breadcrumb__list">
     <li class="usa-breadcrumb__list-item">
-      <a href="javascript:void(0);" class="usa-breadcrumb__link">
+      <a href="/" class="usa-breadcrumb__link">
         <span>Home</span>
       </a>
     </li>
-    <li class="usa-breadcrumb__list-item">
-      <a href="javascript:void(0);" class="usa-breadcrumb__link">
-        <span>Federal Contracting</span>
-      </a>
-    </li>
-    <li class="usa-breadcrumb__list-item">
-      <a href="javascript:void(0);" class="usa-breadcrumb__link">
-        <span>Contracting assistance programs</span>
-      </a>
-    </li>
-    <li class="usa-breadcrumb__list-item usa-current" aria-current="page">
-      <span>Women-owned small business federal contracting program</span>
-    </li>
+    {% if page.url != "/" %}
+      {% assign crumbs = page.url | split: "/" %}
+      {% assign built_path = "" %}
+      {% for crumb in crumbs %}
+        {% if crumb != blank %}
+          {% assign built_path = built_path | append: "/" | append: crumb %}
+          {% assign test_path = built_path | append: "/" %}
+          {% assign crumb_label = breadcrumbs[test_path] %}
+          {% if crumb_label %}
+            {% unless test_path == page.url %}
+              <li class="usa-breadcrumb__list-item">
+                <a href="{{ test_path }}" class="usa-breadcrumb__link">
+                  <span>{{ crumb_label }}</span>
+                </a>
+              </li>
+            {% endunless %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+      
+      {% assign page_label = breadcrumbs[page.url] %}
+      {% if page_label %}
+        <li class="usa-breadcrumb__list-item usa-current" aria-current="page">
+          <span>{{ page_label }}</span>
+        </li>
+      {% endif %}
+    {% endif %}
   </ol>
 </nav>

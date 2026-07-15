@@ -3,6 +3,7 @@
   "private": true,
   "author": "USWDS",
   "license": "CC0-1.0",
+  "type": "module",
   "scripts": {
     "build": "npx @11ty/eleventy",
     "federalist": "npm run init && npm run build && npm run uswds:buildSass",
@@ -18,13 +19,20 @@
     "uswds:copyJS": "gulp copyJS",
     "uswds:update": "npm update uswds && npm run uswds:buildDist",
     "watch": "gulp watchSass",
-    "test": "snyk test"
+    "test": "snyk test",
+    "test:accessibility": "npx playwright test",
+    "test:accessibility:desktop": "npx playwright test --project=desktop",
+    "test:accessibility:tablet": "npx playwright test --project=tablet",
+    "test:accessibility:mobile": "npx playwright test --project=mobile",
+    "test:accessibility:report": "npx playwright show-report"
   },
   "dependencies": {
-    "@uswds/uswds": "3.11.0"
+    "@uswds/uswds": "3.13.0"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
+    "@playwright/test": "^1.49.0",
+    "@axe-core/playwright": "^4.10.0",
     "@uswds/compile": "^1.2.1",
     "concurrently": "^9.1.2",
     "snyk": "^1.1295.3"

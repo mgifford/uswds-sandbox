@@ -1,5 +1,5 @@
-const { series } = require("gulp");
-const uswds = require("@uswds/compile");
+import gulp from "gulp";
+import uswds from "@uswds/compile";
 
 /*
 ----------------------------------------
@@ -35,12 +35,12 @@ TASKS
 ----------------------------------------
 */
 
-exports.compileIcons = uswds.compileIcons;
-exports.copyFonts = uswds.copyFonts;
-exports.copyImages = uswds.copyImages;
-exports.copyJS = uswds.copyJS;
-exports.copyAssets = uswds.copyAssets;
-exports.updateUswds = uswds.updateUswds;
-exports.buildSass = uswds.compileSass;
-exports.watchSass = uswds.watch;
-exports.default = uswds.watch;
+export const compileIcons = uswds.compileIcons;
+export const copyFonts = uswds.copyFonts;
+export const copyImages = uswds.copyImages;
+export const copyJS = uswds.copyJS;
+export const copyAssets = uswds.copyAssets;
+export const updateUswds = uswds.updateUswds;
+export const buildSass = uswds.compileSass;
+export const watchSass = uswds.watch;
+export default uswds.watch;
