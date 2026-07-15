@@ -36,15 +36,13 @@ jobs:
       - name: Initialize USWDS assets
         run: npm run init
 
+      - name: Compile Sass to CSS
+        run: npm run uswds:buildSass
+
       - name: Build site
         run: npm run build
         env:
           BASEURL: /uswds-sandbox/
-
-      - name: Copy assets to site (fallback)
-        run: |
-          mkdir -p _site/assets/css _site/assets/js _site/assets/img _site/assets/fonts
-          cp -r src/assets/* _site/assets/ 2>/dev/null || true
 
       - name: Run Lighthouse CI
         uses: treosh/lighthouse-ci-action@v12
