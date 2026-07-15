@@ -1,0 +1,167 @@
+name: Accessibility Testing
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "accessibility"
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Initialize USWDS assets
+        run: npm run init
+
+      - name: Build site
+        run: npm run build
+        env:
+          BASEURL: /uswds-sandbox/
+
+      - name: Copy assets to site (fallback)
+        run: |
+          mkdir -p _site/assets/css _site/assets/js _site/assets/img _site/assets/fonts
+          cp -r src/assets/* _site/assets/ 2>/dev/null || true
+
+      - name: Run accessibility tests
+        run: npx playwright test --project=desktop
+
+      - name: Generate site report
+        if: always()
+        run: node scripts/generate-accessibility-report.js
+
+      - name: Upload accessibility report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: accessibility-report
+          path: |
+            test-results/
+            src/_data/accessibility-report.json
+          retention-days: 30
+
+      - name: Upload site with report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-with-report
+          path: _site/
+          retention-days: 7
+
+      - name: Comment on PR (if failed)
+        if: failure() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const reportPath = 'src/_data/accessibility-report.json';
+            
+            if (fs.existsSync(reportPath)) {
+              const report = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
+              
+              let comment = `## Accessibility Test Results\n\n`;
+              comment += `❌ **${report.summary.failed}** test(s) failed out of **${report.summary.totalTests}** total tests.\n\n`;
+              comment += `### Failed Tests\n\n`;
+              
+              for (const suite of report.suites) {
+                for (const test of suite.tests) {
+                  if (test.status === 'failed') {
+                    comment += `- **${test.name}** (${suite.name})\n`;
+                    for (const error of test.errors) {
+                      comment += `  - ${error.substring(0, 200)}\n`;
+                    }
+                  }
+                }
+              }
+              
+              comment += `\nPlease fix these accessibility issues before merging.`;
+              
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: comment
+              });
+            }
+
+  deploy-report:
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Initialize USWDS assets
+        run: npm run init
+
+      - name: Run accessibility tests
+        run: npx playwright test --project=desktop
+
+      - name: Generate site report
+        if: always()
+        run: node scripts/generate-accessibility-report.js
+
+      - name: Build site with report
+        run: npm run build
+        env:
+          BASEURL: /uswds-sandbox/
+
+      - name: Copy assets to site (fallback)
+        run: |
+          mkdir -p _site/assets/css _site/assets/js _site/assets/img _site/assets/fonts
+          cp -r src/assets/* _site/assets/ 2>/dev/null || true
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "_site"
+
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    needs: deploy-report
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

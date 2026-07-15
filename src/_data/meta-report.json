@@ -1,0 +1,21 @@
+{
+  "timestamp": null,
+  "summary": {
+    "totalPages": 0,
+    "passed": 0,
+    "failed": 0,
+    "passRate": 0
+  },
+  "checks": {
+    "langAttribute": { "passed": 0, "failed": 0 },
+    "metaDescription": { "passed": 0, "failed": 0 },
+    "titleTag": { "passed": 0, "failed": 0 },
+    "viewport": { "passed": 0, "failed": 0 },
+    "charset": { "passed": 0, "failed": 0 },
+    "canonicalUrl": { "passed": 0, "failed": 0 },
+    "ogTitle": { "passed": 0, "failed": 0 },
+    "ogDescription": { "passed": 0, "failed": 0 },
+    "ogImage": { "passed": 0, "failed": 0 }
+  },
+  "failedPages": []
+}

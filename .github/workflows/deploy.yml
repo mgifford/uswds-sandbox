@@ -33,10 +33,52 @@ jobs:
       - name: Initialize USWDS assets
         run: npm run init
 
+      - name: Verify assets exist
+        run: |
+          echo "=== Checking assets ==="
+          ls -la src/assets/
+          ls -la src/assets/css/ || echo "No CSS in src"
+          ls -la src/assets/js/ || echo "No JS in src"
+          ls -la src/assets/img/ || echo "No img in src"
+          ls -la src/assets/fonts/ || echo "No fonts in src"
+
       - name: Build site
         run: npm run build
         env:
           BASEURL: /uswds-sandbox/
+
+      - name: Verify build output
+        run: |
+          echo "=== Checking build output ==="
+          ls -la _site/
+          ls -la _site/assets/ || echo "No assets in _site"
+          ls -la _site/assets/css/ || echo "No CSS in _site"
+          ls -la _site/assets/js/ || echo "No JS in _site"
+
+      - name: Copy assets to site (fallback)
+        run: |
+          mkdir -p _site/assets/css _site/assets/js _site/assets/img _site/assets/fonts
+          cp -r src/assets/* _site/assets/ 2>/dev/null || true
+          ls -la _site/assets/
+
+      - name: Run accessibility tests
+        run: npx playwright test --project=desktop
+        continue-on-error: true
+
+      - name: Generate accessibility report
+        if: always()
+        run: node scripts/generate-accessibility-report.js
+
+      - name: Rebuild site with report
+        run: npm run build
+        env:
+          BASEURL: /uswds-sandbox/
+
+      - name: Final asset copy
+        run: |
+          cp -r src/assets/* _site/assets/ 2>/dev/null || true
+          echo "=== Final _site/assets ==="
+          ls -la _site/assets/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

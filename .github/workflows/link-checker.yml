@@ -1,0 +1,124 @@
+name: Link Checker
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    # Run weekly on Monday at 10:00 AM UTC
+    - cron: '0 10 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "link-checker"
+  cancel-in-progress: true
+
+jobs:
+  check-links:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Initialize USWDS assets
+        run: npm run init
+
+      - name: Build site
+        run: npm run build
+        env:
+          BASEURL: /uswds-sandbox/
+
+      - name: Copy assets to site (fallback)
+        run: |
+          mkdir -p _site/assets/css _site/assets/js _site/assets/img _site/assets/fonts
+          cp -r src/assets/* _site/assets/ 2>/dev/null || true
+
+      - name: Check links (local build)
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >
+            --verbose
+            --no-progress
+            --exclude-loopback
+            --exclude "^mailto:"
+            --exclude "^tel:"
+            --exclude "^javascript:"
+            --exclude "snyk.io"
+            --exclude "localhost"
+            --accept 200,301,302
+            --timeout 30
+            --max-retries 3
+            --max-redirects 10
+            "_site/**/*.html"
+          output: ./link-check-report.md
+          fail: false
+
+      - name: Generate Link Report
+        if: always()
+        run: |
+          mkdir -p src/_data
+          TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          
+          # Count links and errors
+          TOTAL_LINKS=$(grep -r "href=" _site/**/*.html 2>/dev/null | wc -l || echo "0")
+          BROKEN_LINKS=$(grep -c "❌" link-check-report.md 2>/dev/null || echo "0")
+          
+          cat > src/_data/link-report.json << EOF
+          {
+            "timestamp": "$TIMESTAMP",
+            "status": "${{ job.status }}",
+            "summary": {
+              "totalLinks": $TOTAL_LINKS,
+              "brokenLinks": $BROKEN_LINKS
+            },
+            "reportFile": "link-check-report.md"
+          }
+          EOF
+
+      - name: Upload link check report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: link-check-report
+          path: |
+            link-check-report.md
+            src/_data/link-report.json
+          retention-days: 30
+
+      - name: Comment on PR (if broken links found)
+        if: failure() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            
+            if (fs.existsSync('link-check-report.md')) {
+              const report = fs.readFileSync('link-check-report.md', 'utf8');
+              
+              let comment = `## Link Check Results\n\n`;
+              comment += `❌ Broken links were found in the documentation.\n\n`;
+              comment += `<details>\n<summary>Link Check Report</summary>\n\n`;
+              comment += report.substring(0, 3000);
+              comment += `\n</details>\n\n`;
+              comment += `Please fix the broken links before merging.`;
+              
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: comment
+              });
+            }

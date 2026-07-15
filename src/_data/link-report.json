@@ -1,0 +1,18 @@
+{
+  "timestamp": null,
+  "summary": {
+    "totalLinks": 0,
+    "workingLinks": 0,
+    "brokenLinks": 0,
+    "redirects": 0
+  },
+  "statusCodes": {
+    "200": 0,
+    "301": 0,
+    "302": 0,
+    "404": 0,
+    "500": 0
+  },
+  "brokenLinks": [],
+  "redirects": []
+}

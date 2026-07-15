@@ -1,0 +1,85 @@
+name: Check USWDS Updates
+
+on:
+  schedule:
+    # Run every Monday at 9:00 AM UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  check-updates:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Get current USWDS version
+        id: current
+        run: |
+          CURRENT_VERSION=$(node -p "require('./package.json').dependencies['@uswds/uswds']")
+          echo "version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+          echo "Current USWDS version: $CURRENT_VERSION"
+
+      - name: Get latest USWDS version
+        id: latest
+        run: |
+          LATEST_VERSION=$(npm view @uswds/uswds version)
+          echo "version=$LATEST_VERSION" >> $GITHUB_OUTPUT
+          echo "Latest USWDS version: $LATEST_VERSION"
+
+      - name: Compare versions
+        id: compare
+        run: |
+          if [ "${{ steps.current.outputs.version }}" != "${{ steps.latest.outputs.version }}" ]; then
+            echo "update_needed=true" >> $GITHUB_OUTPUT
+            echo "USWDS update available: ${{ steps.current.outputs.version }} -> ${{ steps.latest.outputs.version }}"
+          else
+            echo "update_needed=false" >> $GITHUB_OUTPUT
+            echo "USWDS is up to date at version ${{ steps.current.outputs.version }}"
+          fi
+
+      - name: Create pull request
+        if: steps.compare.outputs.update_needed == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore(deps): update USWDS to ${{ steps.latest.outputs.version }}"
+          title: "chore(deps): update @uswds/uswds to ${{ steps.latest.outputs.version }}"
+          body: |
+            ## USWDS Update
+            
+            This PR updates the US Web Design System from version `${{ steps.current.outputs.version }}` to `${{ steps.latest.outputs.version }}`.
+            
+            ### Changes
+            - Updated `@uswds/uswds` dependency in `package.json`
+            - Updated `package-lock.json`
+            
+            ### Testing
+            - [ ] Build succeeds (`npm run build`)
+            - [ ] All pages render correctly
+            - [ ] Accessibility tests pass
+            - [ ] Components work as expected
+            
+            ### USWDS Changelog
+            Please review the [USWDS release notes](https://github.com/uswds/uswds/releases/tag/v${{ steps.latest.outputs.version }}) for any breaking changes or important updates.
+            
+            ---
+            *This PR was automatically created by the USWDS Update Checker workflow.*
+          branch: chore/uswds-update-${{ steps.latest.outputs.version }}
+          delete-branch: true
+          labels: |
+            dependencies
+            automated
+
+      - name: No update needed
+        if: steps.compare.outputs.update_needed == 'false'
+        run: echo "USWDS is already at the latest version (${{ steps.latest.outputs.version }})"

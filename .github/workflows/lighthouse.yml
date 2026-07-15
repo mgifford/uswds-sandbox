@@ -1,0 +1,86 @@
+name: Lighthouse CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "lighthouse"
+  cancel-in-progress: true
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Initialize USWDS assets
+        run: npm run init
+
+      - name: Build site
+        run: npm run build
+        env:
+          BASEURL: /uswds-sandbox/
+
+      - name: Copy assets to site (fallback)
+        run: |
+          mkdir -p _site/assets/css _site/assets/js _site/assets/img _site/assets/fonts
+          cp -r src/assets/* _site/assets/ 2>/dev/null || true
+
+      - name: Run Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: |
+            https://mgifford.github.io/uswds-sandbox/
+            https://mgifford.github.io/uswds-sandbox/components/
+            https://mgifford.github.io/uswds-sandbox/components/button/
+            https://mgifford.github.io/uswds-sandbox/components/card/
+            https://mgifford.github.io/uswds-sandbox/components/form/
+            https://mgifford.github.io/uswds-sandbox/templates/
+            https://mgifford.github.io/uswds-sandbox/templates/landing/
+            https://mgifford.github.io/uswds-sandbox/templates/forms/
+          configPath: ./lighthouserc.json
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+
+      - name: Generate Lighthouse Report
+        if: always()
+        run: |
+          mkdir -p src/_data
+          cat > src/_data/lighthouse-report.json << 'EOF'
+          {
+            "timestamp": "${{ github.event.head_commit.timestamp || now() }}",
+            "status": "${{ job.status }}",
+            "urls": [
+              {"url": "/", "category": "Homepage"},
+              {"url": "/components/", "category": "Components"},
+              {"url": "/templates/", "category": "Templates"}
+            ]
+          }
+          EOF
+
+      - name: Upload Lighthouse results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-results
+          path: .lighthouseci/
+          retention-days: 30

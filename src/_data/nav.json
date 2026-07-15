@@ -70,9 +70,26 @@
         {"name": "Password Reset", "url": "/patterns/password-reset/"},
         {"name": "Profile", "url": "/patterns/profile/"}
       ]
+    },
+    {
+      "name": "Accessibility",
+      "url": "/accessibility/"
+    },
+    {
+      "name": "Reports",
+      "url": "/reports/",
+      "contents": [
+        {"name": "Lighthouse", "url": "/reports/lighthouse/"},
+        {"name": "Link Checker", "url": "/reports/links/"},
+        {"name": "Meta Tags", "url": "/reports/meta/"}
+      ]
     }
   ],
   "secondary": [
+    {
+      "name": "Colophon",
+      "url": "/colophon/"
+    },
     {
       "name": "USWDS",
       "url": "https://designsystem.digital.gov/"

@@ -24,7 +24,9 @@
     "test:accessibility:desktop": "npx playwright test --project=desktop",
     "test:accessibility:tablet": "npx playwright test --project=tablet",
     "test:accessibility:mobile": "npx playwright test --project=mobile",
-    "test:accessibility:report": "npx playwright show-report"
+    "test:accessibility:report": "npx playwright show-report",
+    "test:accessibility:generate-report": "node scripts/generate-accessibility-report.js",
+    "test:accessibility:all": "npm run test:accessibility && npm run test:accessibility:generate-report"
   },
   "dependencies": {
     "@uswds/uswds": "3.13.0"

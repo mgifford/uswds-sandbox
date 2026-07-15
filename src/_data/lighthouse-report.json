@@ -1,0 +1,23 @@
+{
+  "timestamp": null,
+  "summary": {
+    "totalUrls": 0,
+    "averagePerformance": 0,
+    "averageAccessibility": 0,
+    "averageBestPractices": 0,
+    "averageSeo": 0
+  },
+  "categories": {
+    "performance": { "score": 0, "status": "pending" },
+    "accessibility": { "score": 0, "status": "pending" },
+    "best-practices": { "score": 0, "status": "pending" },
+    "seo": { "score": 0, "status": "pending" }
+  },
+  "metrics": {
+    "first-contentful-paint": { "value": 0, "status": "pending" },
+    "largest-contentful-paint": { "value": 0, "status": "pending" },
+    "cumulative-layout-shift": { "value": 0, "status": "pending" },
+    "total-blocking-time": { "value": 0, "status": "pending" }
+  },
+  "urls": []
+}

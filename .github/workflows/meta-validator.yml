@@ -1,0 +1,214 @@
+name: Meta Tags Validator
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    # Run weekly on Monday at 11:00 AM UTC
+    - cron: '0 11 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "meta-tags"
+  cancel-in-progress: true
+
+jobs:
+  validate-meta:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Initialize USWDS assets
+        run: npm run init
+
+      - name: Build site
+        run: npm run build
+        env:
+          BASEURL: /uswds-sandbox/
+
+      - name: Copy assets to site (fallback)
+        run: |
+          mkdir -p _site/assets/css _site/assets/js _site/assets/img _site/assets/fonts
+          cp -r src/assets/* _site/assets/ 2>/dev/null || true
+
+      - name: Validate Meta Tags
+        run: |
+          echo "=== Meta Tags Validation Report ===" > meta-validation-report.md
+          echo "Timestamp: $(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> meta-validation-report.md
+          echo "" >> meta-validation-report.md
+          
+          TOTAL_PAGES=0
+          PASSED_PAGES=0
+          FAILED_PAGES=0
+          FAILED_DETAILS=""
+          
+          # Find all HTML files
+          for file in $(find _site -name "*.html" -type f); do
+            TOTAL_PAGES=$((TOTAL_PAGES + 1))
+            PAGE_NAME=$(echo $file | sed 's/_site//')
+            PAGE_FAILED=false
+            PAGE_ISSUES=""
+            
+            # Check for required meta tags
+            if ! grep -q '<html.*lang=' "$file"; then
+              PAGE_FAILED=true
+              PAGE_ISSUES="${PAGE_ISSUES}\n  - Missing lang attribute on html element"
+            fi
+            
+            if ! grep -q '<meta.*name="description"' "$file"; then
+              PAGE_FAILED=true
+              PAGE_ISSUES="${PAGE_ISSUES}\n  - Missing meta description"
+            fi
+            
+            if ! grep -q '<title>' "$file"; then
+              PAGE_FAILED=true
+              PAGE_ISSUES="${PAGE_ISSUES}\n  - Missing title tag"
+            fi
+            
+            if ! grep -q '<meta.*name="viewport"' "$file"; then
+              PAGE_FAILED=true
+              PAGE_ISSUES="${PAGE_ISSUES}\n  - Missing viewport meta tag"
+            fi
+            
+            if ! grep -q '<meta.*charset=' "$file"; then
+              PAGE_FAILED=true
+              PAGE_ISSUES="${PAGE_ISSUES}\n  - Missing charset declaration"
+            fi
+            
+            # Check for Open Graph tags (optional but recommended)
+            OG_TAGS=true
+            if ! grep -q '<meta.*property="og:title"' "$file"; then
+              OG_TAGS=false
+            fi
+            if ! grep -q '<meta.*property="og:description"' "$file"; then
+              OG_TAGS=false
+            fi
+            if ! grep -q '<meta.*property="og:image"' "$file"; then
+              OG_TAGS=false
+            fi
+            
+            # Check for canonical URL
+            if ! grep -q '<link.*rel="canonical"' "$file"; then
+              PAGE_FAILED=true
+              PAGE_ISSUES="${PAGE_ISSUES}\n  - Missing canonical URL"
+            fi
+            
+            if [ "$PAGE_FAILED" = true ]; then
+              FAILED_PAGES=$((FAILED_PAGES + 1))
+              FAILED_DETAILS="${FAILED_DETAILS}\n### ${PAGE_NAME}${PAGE_ISSUES}"
+            else
+              PASSED_PAGES=$((PASSED_PAGES + 1))
+            fi
+          done
+          
+          # Write summary
+          echo "## Summary" >> meta-validation-report.md
+          echo "- **Total Pages Checked:** ${TOTAL_PAGES}" >> meta-validation-report.md
+          echo "- **Passed:** ${PASSED_PAGES}" >> meta-validation-report.md
+          echo "- **Failed:** ${FAILED_PAGES}" >> meta-validation-report.md
+          echo "" >> meta-validation-report.md
+          
+          if [ $FAILED_PAGES -gt 0 ]; then
+            echo "## ❌ Failed Pages" >> meta-validation-report.md
+            echo -e "$FAILED_DETAILS" >> meta-validation-report.md
+          else
+            echo "## ✅ All Pages Passed" >> meta-validation-report.md
+            echo "All pages have the required meta tags." >> meta-validation-report.md
+          fi
+          
+          echo "" >> meta-validation-report.md
+          echo "## Required Meta Tags" >> meta-validation-report.md
+          echo "- \`lang\` attribute on \`<html>\` element" >> meta-validation-report.md
+          echo "- \`<meta name="description">\` tag" >> meta-validation-report.md
+          echo "- \`<title>\` tag" >> meta-validation-report.md
+          echo "- \`<meta name="viewport">\` tag" >> meta-validation-report.md
+          echo "- \`<meta charset="...">\` declaration" >> meta-validation-report.md
+          echo "- \`<link rel="canonical">\` tag" >> meta-validation-report.md
+          echo "" >> meta-validation-report.md
+          echo "## Recommended Meta Tags (Open Graph)" >> meta-validation-report.md
+          echo "- \`<meta property="og:title">\`" >> meta-validation-report.md
+          echo "- \`<meta property="og:description">\`" >> meta-validation-report.md
+          echo "- \`<meta property="og:image">\`" >> meta-validation-report.md
+          echo "- \`<meta property="og:url">\`" >> meta-validation-report.md
+          
+          cat meta-validation-report.md
+          
+          # Create JSON report
+          mkdir -p src/_data
+          TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          
+          cat > src/_data/meta-report.json << EOF
+          {
+            "timestamp": "$TIMESTAMP",
+            "status": "${{ job.status }}",
+            "summary": {
+              "totalPages": $TOTAL_PAGES,
+              "passed": $PASSED_PAGES,
+              "failed": $FAILED_PAGES
+            },
+            "requiredTags": [
+              "lang attribute on html element",
+              "meta description",
+              "title tag",
+              "viewport meta tag",
+              "charset declaration",
+              "canonical URL"
+            ],
+            "recommendedTags": [
+              "og:title",
+              "og:description",
+              "og:image",
+              "og:url"
+            ]
+          }
+          EOF
+
+      - name: Upload meta validation report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: meta-validation-report
+          path: |
+            meta-validation-report.md
+            src/_data/meta-report.json
+          retention-days: 30
+
+      - name: Comment on PR (if validation failed)
+        if: failure() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            
+            if (fs.existsSync('meta-validation-report.md')) {
+              const report = fs.readFileSync('meta-validation-report.md', 'utf8');
+              
+              let comment = `## Meta Tags Validation Results\n\n`;
+              comment += `❌ Some pages are missing required meta tags.\n\n`;
+              comment += `<details>\n<summary>Validation Report</summary>\n\n`;
+              comment += report.substring(0, 3000);
+              comment += `\n</details>\n\n`;
+              comment += `Please add the required meta tags before merging.`;
+              
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: comment
+              });
+            }

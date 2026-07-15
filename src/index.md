@@ -3,13 +3,15 @@ layout: default
 title: USWDS Sandbox
 ---
 
-<section class="usa-hero padding-y-4" style="background-color: #005ea2;">
-  <div class="grid-container">
-    <h1 class="usa-hero__heading">USWDS Sandbox</h1>
-    <p class="usa-font-body-lg">A comprehensive demonstration of the U.S. Web Design System components, templates, and patterns. Explore working examples to see how USWDS can help you build accessible, mobile-friendly government websites.</p>
-    <div class="margin-top-3">
-      <a href="/components/" class="usa-button usa-button--big margin-right-1">Explore Components</a>
-      <a href="/templates/" class="usa-button usa-button--big usa-button--outline usa-button--inverse">View Templates</a>
+<section class="usa-hero padding-y-4 position-relative" style="background: linear-gradient(135deg, #1a2e44 0%, #005ea2 50%, #00687d 100%);">
+  <div class="position-relative z-1">
+    <div class="grid-container">
+      <h1 class="usa-hero__heading text-white">USWDS Sandbox</h1>
+      <p class="usa-font-body-lg text-white">A comprehensive demonstration of the U.S. Web Design System components, templates, and patterns. Explore working examples to see how USWDS can help you build accessible, mobile-friendly government websites.</p>
+      <div class="margin-top-3">
+        <a href="/components/" class="usa-button usa-button--big margin-right-1">Explore Components</a>
+        <a href="/templates/" class="usa-button usa-button--big usa-button--outline usa-button--inverse">View Templates</a>
+      </div>
     </div>
   </div>
 </section>
