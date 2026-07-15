@@ -13,12 +13,13 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "lighthouse"
+  group: lighthouse
   cancel-in-progress: true
 
 jobs:
   lighthouse:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -27,7 +28,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "npm"
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
@@ -63,16 +64,31 @@ jobs:
 
       - name: Generate Lighthouse Report
         if: always()
+        env:
+          COMMIT_TIMESTAMP: ${{ github.event.head_commit.timestamp }}
+          JOB_STATUS: ${{ job.status }}
         run: |
           mkdir -p src/_data
-          cat > src/_data/lighthouse-report.json << 'EOF'
+
+          TIMESTAMP="${COMMIT_TIMESTAMP:-$(date -u +"%Y-%m-%dT%H:%M:%SZ")}"
+
+          cat > src/_data/lighthouse-report.json << EOF
           {
-            "timestamp": "${{ github.event.head_commit.timestamp || now() }}",
-            "status": "${{ job.status }}",
+            "timestamp": "${TIMESTAMP}",
+            "status": "${JOB_STATUS}",
             "urls": [
-              {"url": "/", "category": "Homepage"},
-              {"url": "/components/", "category": "Components"},
-              {"url": "/templates/", "category": "Templates"}
+              {
+                "url": "/",
+                "category": "Homepage"
+              },
+              {
+                "url": "/components/",
+                "category": "Components"
+              },
+              {
+                "url": "/templates/",
+                "category": "Templates"
+              }
             ]
           }
           EOF
