@@ -51,6 +51,8 @@ jobs:
       # Playwright starts the Eleventy web server defined in
       # playwright.config.js. That configuration builds the site before
       # starting the server, so another build is not needed here.
+      # This workflow publishes accessibility reports for triage and does
+      # not gate merges on existing violations.
       - name: Run accessibility tests
         run: npx playwright test --project=desktop
         continue-on-error: true
