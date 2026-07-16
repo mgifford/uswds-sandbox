@@ -33,17 +33,17 @@ title: Government Programs
       </div>
       
       <div class="grid-col-6">
-        <div class="usa-card usa-card--flag usa-card--bordered">
+        <div class="usa-card usa-card--flag">
           <div class="usa-card__header">
-            <h3 class="usa-card__heading">Community Green Energy Grant</h3>
-            <span class="usa-tag">Coming Soon</span>
+            <h3 class="usa-card__heading">Entrepreneur Support Program</h3>
+            <span class="usa-tag usa-tag--success">Live Demo</span>
           </div>
           <div class="usa-card__body">
-            <p>A grant opportunity page with timeline visualization, eligibility pre-screening modal, and application portal.</p>
-            <p class="usa-text-small"><strong>Components featured:</strong> Modal, Timeline, Tables, Media Objects</p>
+            <p>Federal grant program for entrepreneurs and small businesses. Features an eligibility wizard, multi-tier program selection, and full application with save/resume.</p>
+            <p class="usa-text-small"><strong>Components featured:</strong> Hero, Cards, Forms, Process, Accordions, Wizards</p>
           </div>
           <div class="usa-card__footer">
-            <button class="usa-button usa-button--outline" disabled>Coming Soon</button>
+            <a href="/programs/small-business/" class="usa-button">View Demo</a>
           </div>
         </div>
       </div>
@@ -53,7 +53,7 @@ title: Government Programs
       <div class="grid-col-6">
         <div class="usa-card usa-card--flag usa-card--bordered">
           <div class="usa-card__header">
-            <h3 class="usa-card__heading">Find a Veterans Service Office</h3>
+            <h3 class="usa-card__heading">Find a Federal Service Office</h3>
             <span class="usa-tag">Coming Soon</span>
           </div>
           <div class="usa-card__body">
@@ -69,12 +69,12 @@ title: Government Programs
       <div class="grid-col-6">
         <div class="usa-card usa-card--flag usa-card--bordered">
           <div class="usa-card__header">
-            <h3 class="usa-card__heading">Student Debt Relief Portal</h3>
+            <h3 class="usa-card__heading">National Parks Explorer</h3>
             <span class="usa-tag">Coming Soon</span>
           </div>
           <div class="usa-card__body">
-            <p>An eligibility checker with interactive questionnaire, benefits calculator, and application with progress saving.</p>
-            <p class="usa-text-small"><strong>Components featured:</strong> Forms, Progress, Calculators, Alerts</p>
+            <p>Explore fictional marine national parks with reservation system, activity planning, and visitor information.</p>
+            <p class="usa-text-small"><strong>Components featured:</strong> Cards, Media, Date Pickers, Forms, Accordions</p>
           </div>
           <div class="usa-card__footer">
             <button class="usa-button usa-button--outline" disabled>Coming Soon</button>

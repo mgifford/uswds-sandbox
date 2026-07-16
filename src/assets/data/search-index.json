@@ -385,6 +385,13 @@
     "name": "Disaster Recovery"
   },
   {
+    "title": "Federal Entrepreneur Support Program",
+    "description": "",
+    "url": "/programs/small-business/",
+    "category": "",
+    "name": "Entrepreneur Support"
+  },
+  {
     "title": "Accessibility Report",
     "description": "Last scan: {% if accessibility-report.timestamp %}{{ accessibility-report.timestamp | date: \"%B %d, %Y at %I:%M %p UTC\" }}{% else %}No scan data available{% endif %}",
     "url": "/accessibility/",
