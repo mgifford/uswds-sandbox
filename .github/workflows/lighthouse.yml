@@ -1,3 +1,4 @@
+```yaml
 name: Lighthouse CI
 
 on:
@@ -7,18 +8,22 @@ on:
     branches: [main]
   workflow_dispatch:
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
 concurrency:
-  group: lighthouse
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
+
+env:
+  NODE_VERSION: "24"
+  BASEURL: /uswds-sandbox/
 
 jobs:
   lighthouse:
+    name: Build and test with Lighthouse
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout
@@ -27,11 +32,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: ${{ env.NODE_VERSION }}
           cache: npm
+          cache-dependency-path: package-lock.json
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --no-audit --no-fund
 
       - name: Initialize USWDS assets
         run: npm run init
@@ -41,54 +47,79 @@ jobs:
 
       - name: Build site
         run: npm run build
-        env:
-          BASEURL: /uswds-sandbox/
 
+      # lighthouserc.json uses staticDistDir: ./_site and defines the
+      # routes to scan. Lighthouse therefore tests this commit's build,
+      # including pull request changes, rather than the deployed site.
       - name: Run Lighthouse CI
+        id: lighthouse
         uses: treosh/lighthouse-ci-action@v12
         with:
-          urls: |
-            https://mgifford.github.io/uswds-sandbox/
-            https://mgifford.github.io/uswds-sandbox/components/
-            https://mgifford.github.io/uswds-sandbox/components/button/
-            https://mgifford.github.io/uswds-sandbox/components/card/
-            https://mgifford.github.io/uswds-sandbox/components/form/
-            https://mgifford.github.io/uswds-sandbox/templates/
-            https://mgifford.github.io/uswds-sandbox/templates/landing/
-            https://mgifford.github.io/uswds-sandbox/templates/forms/
           configPath: ./lighthouserc.json
           uploadArtifacts: true
           temporaryPublicStorage: true
 
-      - name: Generate Lighthouse Report
+      - name: Generate Lighthouse summary
         if: always()
         env:
           COMMIT_TIMESTAMP: ${{ github.event.head_commit.timestamp }}
-          JOB_STATUS: ${{ job.status }}
+          LIGHTHOUSE_STATUS: ${{ steps.lighthouse.outcome }}
         run: |
-          mkdir -p src/_data
+          node <<'EOF'
+          import fs from 'node:fs';
 
-          TIMESTAMP="${COMMIT_TIMESTAMP:-$(date -u +"%Y-%m-%dT%H:%M:%SZ")}"
+          const timestamp =
+            process.env.COMMIT_TIMESTAMP ||
+            new Date().toISOString();
 
-          cat > src/_data/lighthouse-report.json << EOF
-          {
-            "timestamp": "${TIMESTAMP}",
-            "status": "${JOB_STATUS}",
-            "urls": [
+          const report = {
+            timestamp,
+            status: process.env.LIGHTHOUSE_STATUS || 'unknown',
+            urls: [
               {
-                "url": "/",
-                "category": "Homepage"
+                url: '/',
+                category: 'Homepage'
               },
               {
-                "url": "/components/",
-                "category": "Components"
+                url: '/components/',
+                category: 'Components'
               },
               {
-                "url": "/templates/",
-                "category": "Templates"
+                url: '/components/button/',
+                category: 'Component'
+              },
+              {
+                url: '/components/card/',
+                category: 'Component'
+              },
+              {
+                url: '/components/form/',
+                category: 'Component'
+              },
+              {
+                url: '/templates/',
+                category: 'Templates'
+              },
+              {
+                url: '/templates/landing/',
+                category: 'Template'
+              },
+              {
+                url: '/templates/forms/',
+                category: 'Template'
+              },
+              {
+                url: '/patterns/',
+                category: 'Patterns'
               }
             ]
-          }
+          };
+
+          fs.mkdirSync('src/_data', { recursive: true });
+          fs.writeFileSync(
+            'src/_data/lighthouse-report.json',
+            `${JSON.stringify(report, null, 2)}\n`
+          );
           EOF
 
       - name: Upload Lighthouse results
@@ -96,5 +127,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: lighthouse-results
-          path: .lighthouseci/
+          path: |
+            .lighthouseci/
+            src/_data/lighthouse-report.json
           retention-days: 30
+          if-no-files-found: warn
+```
