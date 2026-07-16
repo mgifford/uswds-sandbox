@@ -1,0 +1,422 @@
+[
+  {
+    "title": "USWDS Sandbox",
+    "description": "",
+    "url": "/",
+    "category": "Home",
+    "name": "Home"
+  },
+  {
+    "title": "Components",
+    "description": "A comprehensive library of reusable, accessible UI components for government websites.",
+    "url": "/components/",
+    "category": "Components",
+    "name": "Components"
+  },
+  {
+    "title": "Accordion",
+    "description": "An accordion is a collapsible content area that allows users to show or hide sections of related content.",
+    "url": "/components/accordion/",
+    "category": "Components",
+    "name": "Accordion"
+  },
+  {
+    "title": "Alert",
+    "description": "Alerts display concise messages for user attention. They should be used sparingly to communicate the status of an action or system.",
+    "url": "/components/alert/",
+    "category": "Components",
+    "name": "Alert"
+  },
+  {
+    "title": "Banner",
+    "description": "The banner identifies an official website of the United States government.",
+    "url": "/components/banner/",
+    "category": "Components",
+    "name": "Banner"
+  },
+  {
+    "title": "Breadcrumb",
+    "description": "Breadcrumbs help users understand where they are within a website and how to get back to previous pages.",
+    "url": "/components/breadcrumb/",
+    "category": "Components",
+    "name": "Breadcrumb"
+  },
+  {
+    "title": "Button",
+    "description": "Buttons communicate actions that users can take. They are typically placed throughout your UI, in places like dialogs, forms, cards, and toolbars.",
+    "url": "/components/button/",
+    "category": "Components",
+    "name": "Button"
+  },
+  {
+    "title": "Button Group",
+    "description": "Button groups place two or more buttons together as a single unit.",
+    "url": "/components/button-group/",
+    "category": "Components",
+    "name": "Button Group"
+  },
+  {
+    "title": "Card",
+    "description": "Cards provide a flexible and extensible content container with multiple variants and options.",
+    "url": "/components/card/",
+    "category": "Components",
+    "name": "Card"
+  },
+  {
+    "title": "Checkbox",
+    "description": "Checkboxes allow users to select one or more options from a list.",
+    "url": "/components/checkbox/",
+    "category": "Components",
+    "name": "Checkbox"
+  },
+  {
+    "title": "Combo Box",
+    "description": "A combo box is a combination of a text input and a dropdown list that allows users to select from a list of options or type their own value.",
+    "url": "/components/combo-box/",
+    "category": "Components",
+    "name": "Combo Box"
+  },
+  {
+    "title": "Date Picker",
+    "description": "A date picker allows users to select a date from a calendar interface.",
+    "url": "/components/date-picker/",
+    "category": "Components",
+    "name": "Date Picker"
+  },
+  {
+    "title": "Date Range Picker",
+    "description": "A date range picker allows users to select a range of two dates from a calendar interface.",
+    "url": "/components/date-range-picker/",
+    "category": "Components",
+    "name": "Date Range Picker"
+  },
+  {
+    "title": "Dropdown",
+    "description": "Dropdowns allow users to select one option from a list of options.",
+    "url": "/components/dropdown/",
+    "category": "Components",
+    "name": "Dropdown"
+  },
+  {
+    "title": "Footer",
+    "description": "The footer provides federal government website information and links across all pages of a site.",
+    "url": "/components/footer/",
+    "category": "Components",
+    "name": "Footer"
+  },
+  {
+    "title": "Form",
+    "description": "Forms allow users to enter and submit data. USWDS provides form components and layouts to ensure accessibility and usability.",
+    "url": "/components/form/",
+    "category": "Components",
+    "name": "Form"
+  },
+  {
+    "title": "Grid",
+    "description": "The USWDS grid system is a 12-column responsive layout system that provides consistent spacing and alignment.",
+    "url": "/components/grid/",
+    "category": "Components",
+    "name": "Grid"
+  },
+  {
+    "title": "Header",
+    "description": "The header provides primary website navigation and agency identity.",
+    "url": "/components/header/",
+    "category": "Components",
+    "name": "Header"
+  },
+  {
+    "title": "Icon",
+    "description": "USWDS icons provide visual indicators and enhance user interfaces with scalable vector graphics.",
+    "url": "/components/icon/",
+    "category": "Components",
+    "name": "Icon"
+  },
+  {
+    "title": "Identifier",
+    "description": "The identifier is an agency identifier component that provides agency information across the bottom of all pages.",
+    "url": "/components/identifier/",
+    "category": "Components",
+    "name": "Identifier"
+  },
+  {
+    "title": "Input Mask",
+    "description": "Input masks help users format input values like dates, phone numbers, and social security numbers.",
+    "url": "/components/input-mask/",
+    "category": "Components",
+    "name": "Input Mask"
+  },
+  {
+    "title": "Input Prefix/Suffix",
+    "description": "Input prefixes and suffixes provide context to help users understand what type of value they should enter.",
+    "url": "/components/input-prefix-suffix/",
+    "category": "Components",
+    "name": "Input Prefix/Suffix"
+  },
+  {
+    "title": "Label",
+    "description": "Labels describe form fields and help users understand what information to enter.",
+    "url": "/components/label/",
+    "category": "Components",
+    "name": "Label"
+  },
+  {
+    "title": "Link",
+    "description": "Links allow users to navigate to other pages or sections within the site.",
+    "url": "/components/link/",
+    "category": "Components",
+    "name": "Link"
+  },
+  {
+    "title": "List",
+    "description": "Lists organize related items into a sequential or non-sequential format.",
+    "url": "/components/list/",
+    "category": "Components",
+    "name": "List"
+  },
+  {
+    "title": "Modal",
+    "description": "Modals present content in a layer above the page. They are used for important alerts or interactions that require user attention.",
+    "url": "/components/modal/",
+    "category": "Components",
+    "name": "Modal"
+  },
+  {
+    "title": "Navigation",
+    "description": "USWDS navigation components help users find content and navigate through a website.",
+    "url": "/components/navigation/",
+    "category": "Components",
+    "name": "Navigation"
+  },
+  {
+    "title": "Pagination",
+    "description": "Pagination provides navigation for multi-page content, allowing users to move between pages.",
+    "url": "/components/pagination/",
+    "category": "Components",
+    "name": "Pagination"
+  },
+  {
+    "title": "Process",
+    "description": "The process component provides a visual step-by-step indicator for multi-step workflows.",
+    "url": "/components/process/",
+    "category": "Components",
+    "name": "Process"
+  },
+  {
+    "title": "Radio",
+    "description": "Radio buttons allow users to select exactly one option from a group.",
+    "url": "/components/radio/",
+    "category": "Components",
+    "name": "Radio"
+  },
+  {
+    "title": "Range Slider",
+    "description": "Range sliders allow users to select a value from a range by moving a slider thumb.",
+    "url": "/components/range-slider/",
+    "category": "Components",
+    "name": "Range Slider"
+  },
+  {
+    "title": "Search",
+    "description": "The search component provides a search input for finding content across the site.",
+    "url": "/components/search/",
+    "category": "Components",
+    "name": "Search"
+  },
+  {
+    "title": "Side Navigation",
+    "description": "Side navigation provides a secondary navigation pattern typically used in documentation or multi-section pages.",
+    "url": "/components/side-navigation/",
+    "category": "Components",
+    "name": "Side Navigation"
+  },
+  {
+    "title": "Slider",
+    "description": "The slider component allows users to display a carousel of images or content.",
+    "url": "/components/slider/",
+    "category": "Components",
+    "name": "Slider"
+  },
+  {
+    "title": "Step Indicator",
+    "description": "The step indicator component shows a user's progress through a multi-step process.",
+    "url": "/components/step-indicator/",
+    "category": "Components",
+    "name": "Step Indicator"
+  },
+  {
+    "title": "Summary Box",
+    "description": "Summary boxes highlight key information with a clear visual hierarchy.",
+    "url": "/components/summary-box/",
+    "category": "Components",
+    "name": "Summary Box"
+  },
+  {
+    "title": "Table",
+    "description": "Tables organize and display data in rows and columns.",
+    "url": "/components/table/",
+    "category": "Components",
+    "name": "Table"
+  },
+  {
+    "title": "Tag",
+    "description": "Tags are used for items like names, categories, or labels.",
+    "url": "/components/tag/",
+    "category": "Components",
+    "name": "Tag"
+  },
+  {
+    "title": "Text Input",
+    "description": "Text inputs allow users to enter single-line text, numbers, or passwords.",
+    "url": "/components/text-input/",
+    "category": "Components",
+    "name": "Text Input"
+  },
+  {
+    "title": "Tooltip",
+    "description": "Tooltips provide contextual help or definitions when users hover over or focus on an element.",
+    "url": "/components/tooltip/",
+    "category": "Components",
+    "name": "Tooltip"
+  },
+  {
+    "title": "Typography",
+    "description": "USWDS typography provides a consistent hierarchy of text styles for government websites.",
+    "url": "/components/typography/",
+    "category": "Components",
+    "name": "Typography"
+  },
+  {
+    "title": "Validation",
+    "description": "Form validation communicates errors and successes to help users correct invalid data.",
+    "url": "/components/validation/",
+    "category": "Components",
+    "name": "Validation"
+  },
+  {
+    "title": "Templates",
+    "description": "Complete, ready-to-use page templates following the U.S. Web Design System (USWDS). Each template demonstrates a common government website pattern with accessible markup and proper USWDS components.",
+    "url": "/templates/",
+    "category": "Templates",
+    "name": "Templates"
+  },
+  {
+    "title": "\"Page not found\"",
+    "description": "",
+    "url": "/templates/404/",
+    "category": "Templates",
+    "name": "404 Page"
+  },
+  {
+    "title": "Documentation Page Template",
+    "description": "",
+    "url": "/templates/documentation/",
+    "category": "Templates",
+    "name": "Documentation"
+  },
+  {
+    "title": "Landing Page Template",
+    "description": "",
+    "url": "/templates/landing/",
+    "category": "Templates",
+    "name": "Landing Page"
+  },
+  {
+    "title": "Authentication Pages Template",
+    "description": "This template demonstrates complete authentication flows for government services, including sign in, account creation, password recovery, and two-factor authentication.",
+    "url": "/templates/authentication/",
+    "category": "Templates",
+    "name": "Authentication"
+  },
+  {
+    "title": "Patterns",
+    "description": "Common design patterns and page templates for government websites.",
+    "url": "/patterns/",
+    "category": "Patterns",
+    "name": "Patterns"
+  },
+  {
+    "title": "Contact Form",
+    "description": "Contact forms allow users to send messages or inquiries to an organization. This pattern demonstrates accessible form validation and proper field grouping.",
+    "url": "/patterns/contact-form/",
+    "category": "Patterns",
+    "name": "Contact Form"
+  },
+  {
+    "title": "Registration Form",
+    "description": "",
+    "url": "/patterns/registration-form/",
+    "category": "Patterns",
+    "name": "Registration Form"
+  },
+  {
+    "title": "Search with Autocomplete",
+    "description": "Search with autocomplete provides suggestions as users type, helping them find content faster and reducing input errors.",
+    "url": "/patterns/search-with-autocomplete/",
+    "category": "Patterns",
+    "name": "Search with Autocomplete"
+  },
+  {
+    "title": "Password Reset",
+    "description": "Password reset patterns guide users through the process of recovering access to their accounts when they've forgotten their password.",
+    "url": "/patterns/password-reset/",
+    "category": "Patterns",
+    "name": "Password Reset"
+  },
+  {
+    "title": "Profile",
+    "description": "User profile pages display account information, preferences, and activity. This pattern demonstrates a complete profile management interface.",
+    "url": "/patterns/profile/",
+    "category": "Patterns",
+    "name": "Profile"
+  },
+  {
+    "title": "Accessibility Report",
+    "description": "Last scan: {% if accessibility-report.timestamp %}{{ accessibility-report.timestamp | date: \"%B %d, %Y at %I:%M %p UTC\" }}{% else %}No scan data available{% endif %}",
+    "url": "/accessibility/",
+    "category": "Accessibility",
+    "name": "Accessibility"
+  },
+  {
+    "title": "Quality Reports",
+    "description": "Comprehensive quality metrics and scan results for the USWDS Sandbox.",
+    "url": "/reports/",
+    "category": "Reports",
+    "name": "Reports"
+  },
+  {
+    "title": "Lighthouse Report",
+    "description": "Performance metrics and scores from Google Lighthouse scans.",
+    "url": "/reports/lighthouse/",
+    "category": "Reports",
+    "name": "Lighthouse"
+  },
+  {
+    "title": "Link Checker Report",
+    "description": "Results from automated link validation scans.",
+    "url": "/reports/links/",
+    "category": "Reports",
+    "name": "Link Checker"
+  },
+  {
+    "title": "Meta Tags Report",
+    "description": "Validation of HTML meta tags across all pages.",
+    "url": "/reports/meta/",
+    "category": "Reports",
+    "name": "Meta Tags"
+  },
+  {
+    "title": "Search",
+    "description": "Search components, templates, and patterns",
+    "url": "/search/",
+    "category": "",
+    "name": "Search"
+  },
+  {
+    "title": "Colophon",
+    "description": "How this site is built and maintained.",
+    "url": "/colophon/",
+    "category": "About",
+    "name": "Colophon"
+  }
+]

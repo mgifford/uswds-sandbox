@@ -83,6 +83,10 @@
         {"name": "Link Checker", "url": "/reports/links/"},
         {"name": "Meta Tags", "url": "/reports/meta/"}
       ]
+    },
+    {
+      "name": "Search",
+      "url": "/search/"
     }
   ],
   "secondary": [

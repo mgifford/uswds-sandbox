@@ -5,7 +5,8 @@
   "license": "CC0-1.0",
   "type": "module",
   "scripts": {
-    "build": "npx @11ty/eleventy",
+    "build": "node scripts/build-search-index.js && npx @11ty/eleventy",
+    "build:search": "node scripts/build-search-index.js",
     "federalist": "npm run init && npm run build && npm run uswds:buildSass",
     "init": "npm run uswds:buildDist && npm run uswds:copyAssets",
     "serve": "npx @11ty/eleventy --serve",
