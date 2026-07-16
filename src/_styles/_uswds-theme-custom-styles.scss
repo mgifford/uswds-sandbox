@@ -1,1 +1,25 @@
 @use "uswds-core" as *;
+
+// Hero with background image
+.usa-hero--media {
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+// Text overlay for readability
+.usa-hero--media::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); // Semi-transparent dark overlay
+}
+
+// Ensure content is above overlay
+.usa-hero--media > .grid-container {
+  position: relative;
+  z-index: 1;
+}

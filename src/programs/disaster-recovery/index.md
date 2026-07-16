@@ -3,7 +3,7 @@ layout: sandbox
 title: Disaster Recovery Assistance
 ---
 
-<section class="usa-hero padding-y-4" style="background-color: #1a4480;">
+<section class="usa-hero usa-hero--media padding-y-4" style="background-image: url('/assets/img/heroes/disaster-recovery.jpg');">
   <div class="grid-container">
     <div class="grid-row grid-gap">
       <div class="grid-col-8">

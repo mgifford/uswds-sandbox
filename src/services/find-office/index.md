@@ -3,7 +3,7 @@ layout: sandbox
 title: Find a Federal Service Office
 ---
 
-<section class="usa-hero padding-y-4" style="background-color: #1a4480;">
+<section class="usa-hero usa-hero--media padding-y-4" style="background-image: url('/assets/img/heroes/find-office.jpg');">
   <div class="grid-container">
     <h1 class="usa-hero__heading">Find a Federal Service Office</h1>
     <p class="font-body-lg">Locate government offices near you for passports, Social Security, veterans services, and more. Schedule an appointment to skip the line.</p>

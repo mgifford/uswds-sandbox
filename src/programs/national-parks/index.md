@@ -3,7 +3,7 @@ layout: sandbox
 title: National Marine Parks Explorer
 ---
 
-<section class="usa-hero padding-y-4" style="background-color: #00687d;">
+<section class="usa-hero usa-hero--media padding-y-4" style="background-image: url('/assets/img/heroes/national-parks.jpg');">
   <div class="grid-container">
     <div class="grid-row grid-gap">
       <div class="grid-col-8">

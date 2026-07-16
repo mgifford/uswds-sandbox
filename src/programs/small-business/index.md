@@ -3,7 +3,7 @@ layout: sandbox
 title: Federal Entrepreneur Support Program
 ---
 
-<section class="usa-hero padding-y-4" style="background-color: #1a4480;">
+<section class="usa-hero usa-hero--media padding-y-4" style="background-image: url('/assets/img/heroes/small-business.jpg');">
   <div class="grid-container">
     <div class="grid-row grid-gap">
       <div class="grid-col-8">
@@ -157,7 +157,7 @@ title: Federal Entrepreneur Support Program
     <p class="font-body-lg margin-bottom-2">Choose the program that fits your business stage and goals.</p>
     
     <div class="grid-row grid-gap">
-      <div class="grid-col-4">
+      <div class="grid-col-6">
         <div class="usa-card usa-card--flag">
           <div class="usa-card__header">
             <h3 class="usa-card__heading">Launch Pad</h3>
@@ -179,7 +179,7 @@ title: Federal Entrepreneur Support Program
         </div>
       </div>
       
-      <div class="grid-col-4">
+      <div class="grid-col-6">
         <div class="usa-card usa-card--flag usa-card--accent-base">
           <div class="usa-card__header">
             <h3 class="usa-card__heading">Growth Engine</h3>
@@ -200,8 +200,10 @@ title: Federal Entrepreneur Support Program
           </div>
         </div>
       </div>
-      
-      <div class="grid-col-4">
+    </div>
+    
+    <div class="grid-row grid-gap margin-top-2">
+      <div class="grid-col-6 grid-offset-3">
         <div class="usa-card usa-card--flag usa-card--accent-cool">
           <div class="usa-card__header">
             <h3 class="usa-card__heading">Innovation Accelerator</h3>

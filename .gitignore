@@ -7,6 +7,9 @@ src/assets/css
 src/assets/fonts
 src/assets/js
 
+# Exception: Hero images (manually added)
+!src/assets/img/heroes/
+
 # Dependencies
 node_modules
 
