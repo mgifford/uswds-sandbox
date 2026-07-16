@@ -371,6 +371,20 @@
     "name": "Profile"
   },
   {
+    "title": "Government Programs",
+    "description": "",
+    "url": "/programs/",
+    "category": "",
+    "name": "Programs"
+  },
+  {
+    "title": "Disaster Recovery Assistance",
+    "description": "",
+    "url": "/programs/disaster-recovery/",
+    "category": "",
+    "name": "Disaster Recovery"
+  },
+  {
     "title": "Accessibility Report",
     "description": "Last scan: {% if accessibility-report.timestamp %}{{ accessibility-report.timestamp | date: \"%B %d, %Y at %I:%M %p UTC\" }}{% else %}No scan data available{% endif %}",
     "url": "/accessibility/",

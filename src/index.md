@@ -61,6 +61,29 @@ title: USWDS Sandbox
   </div>
 </section>
 
+<section class="usa-section bg-accent-cool-lightest">
+  <div class="grid-container">
+    <div class="grid-row grid-gap">
+      <div class="grid-col-8">
+        <h2 class="font-heading-xl margin-bottom-2">See USWDS in Action</h2>
+        <p class="font-body-lg">Components are building blocks. Programs are complete experiences. See how multiple USWDS components combine to create realistic government service pages with working forms and interactive elements.</p>
+        <div class="margin-top-3">
+          <a href="/programs/disaster-recovery/" class="usa-button usa-button--big">Try Disaster Recovery Demo</a>
+          <a href="/programs/" class="usa-button usa-button--big usa-button--outline margin-left-1">View All Programs</a>
+        </div>
+      </div>
+      <div class="grid-col-4">
+        <div class="bg-white padding-2 radius-md">
+          <h3 class="font-heading-lg margin-top-0">Featured Demo</h3>
+          <p><strong>Disaster Recovery Assistance</strong></p>
+          <p class="usa-text-small">Multi-step application with eligibility wizard, progress saving, and confirmation tracking.</p>
+          <p class="usa-text-small text-accent-cool"><strong>Components:</strong> Hero, Process, Forms, Alerts, Accordion</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="grid-container padding-y-4">
   <h2 class="font-heading-xl margin-bottom-2">Popular Components</h2>
   <div class="grid-row grid-gap">
