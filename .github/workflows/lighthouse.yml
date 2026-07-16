@@ -1,4 +1,3 @@
-```yaml
 name: Lighthouse CI
 
 on:
@@ -132,4 +131,3 @@ jobs:
             src/_data/lighthouse-report.json
           retention-days: 30
           if-no-files-found: warn
-```
