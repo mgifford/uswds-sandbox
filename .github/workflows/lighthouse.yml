@@ -1,4 +1,3 @@
-```yaml
 name: Lighthouse CI
 
 on:
@@ -136,4 +135,3 @@ jobs:
           include-hidden-files: true
           retention-days: 30
           if-no-files-found: warn
-```
