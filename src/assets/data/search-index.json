@@ -392,6 +392,27 @@
     "name": "Entrepreneur Support"
   },
   {
+    "title": "National Marine Parks Explorer",
+    "description": "",
+    "url": "/programs/national-parks/",
+    "category": "",
+    "name": "National Parks"
+  },
+  {
+    "title": "Government Services",
+    "description": "",
+    "url": "/services/",
+    "category": "",
+    "name": "Services"
+  },
+  {
+    "title": "Find a Federal Service Office",
+    "description": "",
+    "url": "/services/find-office/",
+    "category": "",
+    "name": "Find an Office"
+  },
+  {
     "title": "Accessibility Report",
     "description": "Last scan: {% if accessibility-report.timestamp %}{{ accessibility-report.timestamp | date: \"%B %d, %Y at %I:%M %p UTC\" }}{% else %}No scan data available{% endif %}",
     "url": "/accessibility/",

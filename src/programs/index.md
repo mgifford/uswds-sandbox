@@ -51,33 +51,33 @@ title: Government Programs
     
     <div class="grid-row grid-gap margin-top-2">
       <div class="grid-col-6">
-        <div class="usa-card usa-card--flag usa-card--bordered">
+        <div class="usa-card usa-card--flag">
           <div class="usa-card__header">
             <h3 class="usa-card__heading">Find a Federal Service Office</h3>
-            <span class="usa-tag">Coming Soon</span>
+            <span class="usa-tag usa-tag--success">Live Demo</span>
           </div>
           <div class="usa-card__body">
             <p>A location finder with search, filtering, and appointment scheduling. Shows how to build effective service locators.</p>
             <p class="usa-text-small"><strong>Components featured:</strong> Search, Forms, Tables, Cards, Filters</p>
           </div>
           <div class="usa-card__footer">
-            <button class="usa-button usa-button--outline" disabled>Coming Soon</button>
+            <a href="/services/find-office/" class="usa-button">View Demo</a>
           </div>
         </div>
       </div>
       
       <div class="grid-col-6">
-        <div class="usa-card usa-card--flag usa-card--bordered">
+        <div class="usa-card usa-card--flag">
           <div class="usa-card__header">
             <h3 class="usa-card__heading">National Parks Explorer</h3>
-            <span class="usa-tag">Coming Soon</span>
+            <span class="usa-tag usa-tag--success">Live Demo</span>
           </div>
           <div class="usa-card__body">
             <p>Explore fictional marine national parks with reservation system, activity planning, and visitor information.</p>
             <p class="usa-text-small"><strong>Components featured:</strong> Cards, Media, Date Pickers, Forms, Accordions</p>
           </div>
           <div class="usa-card__footer">
-            <button class="usa-button usa-button--outline" disabled>Coming Soon</button>
+            <a href="/programs/national-parks/" class="usa-button">View Demo</a>
           </div>
         </div>
       </div>
