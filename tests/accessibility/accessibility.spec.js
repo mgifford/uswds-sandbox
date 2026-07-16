@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import AxeBuilder from '@axe-core/playwright';
+import '@accesslint/playwright';
 
 // All pages to test
 const pages = [
@@ -73,29 +73,8 @@ test.describe('Accessibility Tests', () => {
       // Wait for page to be fully loaded
       await playwrightPage.waitForLoadState('networkidle');
       
-      // Run axe accessibility scan
-      const results = await new AxeBuilder({ page: playwrightPage })
-        .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'best-practice'])
-        .analyze();
-      
-      // Log violations for debugging
-      if (results.violations.length > 0) {
-        console.log(`\n=== ${page.name} Accessibility Violations ===`);
-        for (const violation of results.violations) {
-          console.log(`\nViolation: ${violation.id}`);
-          console.log(`Impact: ${violation.impact}`);
-          console.log(`Description: ${violation.description}`);
-          console.log(`Help: ${violation.help}`);
-          console.log(`Help URL: ${violation.helpUrl}`);
-          console.log(`Elements affected: ${violation.nodes.length}`);
-          for (const node of violation.nodes.slice(0, 3)) {
-            console.log(`  - ${node.html.substring(0, 100)}...`);
-          }
-        }
-      }
-      
-      // Assert no violations
-      expect(results.violations).toEqual([]);
+      // Run AccessLint accessibility scan
+      await expect(playwrightPage).toBeAccessible();
     });
   }
 });
