@@ -197,6 +197,37 @@ test.describe('Combo box keyboard tests', () => {
     await expect(output).toContainText('PR');
     await expect(output).toContainText('Puerto Rico');
   });
+
+  test('fill and click selects option (medicare dashboard pattern)', async ({
+    page,
+  }) => {
+    // This is the exact interaction pattern from mgifford/medicare_monthly_enrollment_dashboard#1
+    // that fails in Firefox: fill() + click() on the option
+    await page.goto(PAGE);
+    await page.waitForLoadState('networkidle');
+    await page.waitForTimeout(2000);
+
+    const input = page.locator('#state-combo-box');
+    await input.click();
+    await input.fill('Puerto Rico');
+    await page.waitForTimeout(500);
+
+    // Select from dropdown — same locator pattern as medicare dashboard
+    const option = page.locator(
+      '#state-combo-box--list .usa-combo-box__list-option',
+      { hasText: 'Puerto Rico' }
+    );
+    await option.click();
+    await page.waitForTimeout(500);
+
+    const value = await input.inputValue();
+    expect(value).toContain('Puerto Rico');
+
+    // Output region should also update
+    const output = page.locator('#combo-box-output');
+    await expect(output).toContainText('PR');
+    await expect(output).toContainText('Puerto Rico');
+  });
 });
 
 test.describe('Native select tests', () => {

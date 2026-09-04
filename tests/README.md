@@ -44,8 +44,14 @@ npm run test:combo-keyboard:chrome
 # Combo box keyboard tests (Firefox only)
 npm run test:combo-keyboard:firefox
 
-# Combo box screenreader tests (Chrome only, requires GuidePup)
+# Combo box screenreader tests (Chrome only, requires GuidePup virtual SR)
 npm run test:combo-screenreader
+
+# GuidePup VoiceOver tests (macOS only, requires real VoiceOver)
+npm run test:guidepup:voiceover
+
+# GuidePup NVDA tests (Windows only, requires real NVDA)
+npm run test:guidepup:nvda
 ```
 
 ### View test results
@@ -85,13 +91,18 @@ npm run test:accessibility:report
 - **Escape closes list**: Without selecting
 - **Click selects option**: Mouse interaction works
 - **Type and Enter**: Filters and selects matching option
+- **Fill and click**: Medicare dashboard pattern (`fill()` + `click()`) — regression test for Firefox
 - **Native select fallback**: Change event updates output region
 
-### Combo Box Screenreader Tests (GuidePup)
+### Combo Box Screenreader Tests (GuidePup Virtual)
 - **Input announced as combobox**: Correct role and name
 - **Listbox announced on open**: Options visible to screen readers
 - **Keyboard navigation announced**: Active option with position info
 - **Selection announced**: Chosen option confirmed
+
+### Combo Box VoiceOver Tests (GuidePup — macOS only)
+- **Combo box announced correctly**: VoiceOver reads role and label
+- **Keyboard interaction with VoiceOver**: ArrowDown/Enter works with screen reader
 
 ## Test Results
 

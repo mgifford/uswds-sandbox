@@ -32,14 +32,18 @@
     "test:combo-keyboard": "npx playwright test tests/accessibility/combo-box-keyboard.spec.js --project=desktop-chrome --project=desktop-firefox",
     "test:combo-keyboard:chrome": "npx playwright test tests/accessibility/combo-box-keyboard.spec.js --project=desktop-chrome",
     "test:combo-keyboard:firefox": "npx playwright test tests/accessibility/combo-box-keyboard.spec.js --project=desktop-firefox",
-    "test:combo-screenreader": "npx playwright test tests/accessibility/combo-box-screenreader.spec.ts --project=desktop-chrome"
+    "test:combo-screenreader": "npx playwright test tests/accessibility/combo-box-screenreader.spec.ts --project=desktop-chrome",
+    "test:guidepup:voiceover": "guidepup run --browser webkit --voiceover",
+    "test:guidepup:nvda": "guidepup run --browser chromium --nvda"
   },
   "dependencies": {
     "@uswds/uswds": "3.13.0"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
-    "@guidepup/playwright": "^0.18.0",
+    "@guidepup/guidepup": "^0.34.0",
+    "@guidepup/playwright": "^0.19.1",
+    "@guidepup/setup": "^0.25.2",
     "@guidepup/virtual-screen-reader": "^0.32.1",
     "@playwright/test": "^1.49.0",
     "@accesslint/playwright": "^0.5.0",

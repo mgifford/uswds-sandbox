@@ -39,8 +39,8 @@ jobs:
       - name: Install dependencies
         run: npm ci --no-audit --no-fund
 
-      - name: Install Playwright Chromium
-        run: npx playwright install --with-deps chromium
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium firefox
 
       - name: Initialize USWDS assets
         run: npm run init
@@ -54,7 +54,7 @@ jobs:
       # This workflow publishes accessibility reports for triage and does
       # not gate merges on existing violations.
       - name: Run accessibility tests
-        run: npx playwright test --project=desktop-chrome
+        run: npx playwright test --project=desktop-chrome --project=desktop-firefox
         continue-on-error: true
 
       - name: Generate accessibility report
