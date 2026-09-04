@@ -77,7 +77,8 @@
       "contents": [
         {"name": "Disaster Recovery", "url": "/programs/disaster-recovery/"},
         {"name": "Entrepreneur Support", "url": "/programs/small-business/"},
-        {"name": "National Parks", "url": "/programs/national-parks/"}
+        {"name": "National Parks", "url": "/programs/national-parks/"},
+        {"name": "State Combobox Test", "url": "/programs/state-combobox-test/"}
       ]
     },
     {
