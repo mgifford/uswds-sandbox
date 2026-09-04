@@ -54,7 +54,7 @@ jobs:
       # This workflow publishes accessibility reports for triage and does
       # not gate merges on existing violations.
       - name: Run accessibility tests
-        run: npx playwright test --project=desktop
+        run: npx playwright test --project=desktop-chrome
         continue-on-error: true
 
       - name: Generate accessibility report
@@ -158,12 +158,82 @@ jobs:
               body: comment
             });
 
+  combo-keyboard:
+    name: Combo box keyboard tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium firefox
+
+      - name: Initialize USWDS assets
+        run: npm run init
+
+      - name: Compile Sass to CSS
+        run: npm run uswds:buildSass
+
+      - name: Run combo box keyboard tests
+        run: npx playwright test tests/accessibility/combo-box-keyboard.spec.js --project=desktop-chrome --project=desktop-firefox
+
+  combo-screenreader:
+    name: Combo box screenreader tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Initialize USWDS assets
+        run: npm run init
+
+      - name: Compile Sass to CSS
+        run: npm run uswds:buildSass
+
+      - name: Run combo box screenreader tests
+        run: npx playwright test tests/accessibility/combo-box-screenreader.spec.ts --project=desktop-chrome
+
   deploy:
     name: Deploy accessibility report
     if: >
       github.ref == 'refs/heads/main' &&
       github.event_name == 'push'
-    needs: test
+    needs: [test, combo-keyboard, combo-screenreader]
     runs-on: ubuntu-latest
     timeout-minutes: 10
 

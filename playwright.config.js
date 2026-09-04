@@ -20,9 +20,16 @@ export default defineConfig({
   },
   projects: [
     {
-      name: 'desktop',
+      name: 'desktop-chrome',
       use: {
         ...devices['Desktop Chrome'],
+        viewport: { width: 1280, height: 720 },
+      },
+    },
+    {
+      name: 'desktop-firefox',
+      use: {
+        ...devices['Desktop Firefox'],
         viewport: { width: 1280, height: 720 },
       },
     },

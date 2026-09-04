@@ -21,19 +21,26 @@
     "uswds:update": "npm update uswds && npm run uswds:buildDist",
     "watch": "gulp watchSass",
     "test": "snyk test",
-    "test:accessibility": "npx playwright test",
-    "test:accessibility:desktop": "npx playwright test --project=desktop",
+    "test:accessibility": "npx playwright test --project=desktop-chrome",
+    "test:accessibility:desktop": "npx playwright test --project=desktop-chrome",
+    "test:accessibility:firefox": "npx playwright test --project=desktop-firefox",
     "test:accessibility:tablet": "npx playwright test --project=tablet",
     "test:accessibility:mobile": "npx playwright test --project=mobile",
     "test:accessibility:report": "npx playwright show-report",
     "test:accessibility:generate-report": "node scripts/generate-accessibility-report.js",
-    "test:accessibility:all": "npm run test:accessibility && npm run test:accessibility:generate-report"
+    "test:accessibility:all": "npm run test:accessibility && npm run test:accessibility:generate-report",
+    "test:combo-keyboard": "npx playwright test tests/accessibility/combo-box-keyboard.spec.js --project=desktop-chrome --project=desktop-firefox",
+    "test:combo-keyboard:chrome": "npx playwright test tests/accessibility/combo-box-keyboard.spec.js --project=desktop-chrome",
+    "test:combo-keyboard:firefox": "npx playwright test tests/accessibility/combo-box-keyboard.spec.js --project=desktop-firefox",
+    "test:combo-screenreader": "npx playwright test tests/accessibility/combo-box-screenreader.spec.ts --project=desktop-chrome"
   },
   "dependencies": {
     "@uswds/uswds": "3.13.0"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
+    "@guidepup/playwright": "^0.18.0",
+    "@guidepup/virtual-screen-reader": "^0.32.1",
     "@playwright/test": "^1.49.0",
     "@accesslint/playwright": "^0.5.0",
     "@uswds/compile": "^1.2.1",
